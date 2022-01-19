@@ -1,13 +1,15 @@
 import React, { useEffect } from 'react';
 import './App.css';
-import CartPage from './pages/CartPage';
+import Favorites from './components/Favorites/Favorites';
+import FavoritesPage from './pages/FavoritesPage';
+import MainPage from './pages/MainPage';
 
 
 function App() {
 
   return (
     <div className="App">
-    <CartPage/>
+    <MainPage/>
     </div>
   );
 }
