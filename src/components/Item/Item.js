@@ -1,10 +1,22 @@
 import { useState } from 'react'
 import './Item.css'
+import { useDispatch } from 'react-redux'
+import { addCartItem } from '../../store/slices/cartSlice'
 
 const Item =({id, title, price, bladeLength, material, imageSrc}) => {
 
     const [isTargeted, setIsTargeted] = useState(false)
+    const dispatch =useDispatch()
 
+    const ClickHandler =()=>{
+        dispatch(addCartItem({
+            id:id,
+            imageSrc:imageSrc,
+            title:title,
+            price:price
+        }))
+
+    }
 
     return <div className='item-wrap'onMouseEnter={()=>setIsTargeted(true)} onMouseLeave={()=>setIsTargeted(false)} >
         <div>
@@ -19,7 +31,7 @@ const Item =({id, title, price, bladeLength, material, imageSrc}) => {
                 <h3> blade {bladeLength} sm</h3>
                 <h3>{material}</h3>
             </div>
-             <button>Buy</button>
+             <button onClick={ClickHandler}>Buy</button>
         </div>
        
 

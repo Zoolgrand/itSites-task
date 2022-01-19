@@ -1,0 +1,14 @@
+.cart{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 20px;
+}
+.confirm-button{
+    height: 80px;
+    width: 300px;
+    background-color: cyan;
+    border: none;
+    border-radius: 10px;
+    font-size: 2em;
+}
