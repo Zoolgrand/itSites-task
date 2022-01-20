@@ -8,8 +8,7 @@ h3 {
 
 .item-wrap {
     background-color: yellow;
-    height: 200px;
-    width: 300px;
+    height: 250px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -23,6 +22,7 @@ h3 {
 
 .item {
     height: 130px;
+    width: 170px;
 }
 
 .item-info {
@@ -35,14 +35,18 @@ h3 {
 .info-displayed-hover {
     opacity: 100;
 }
-.hide{opacity: 0;}
+
+.hide {
+    opacity: 0;
+}
 
 .item-wrap:hover {
     transform: scale(120%);
     box-shadow: 5px 5px 15px 5px #000000;
 }
-button{
-    height: 30px;
+
+button {
+    height: 20px;
     width: 70px;
     border: none;
     border-radius: 7px;

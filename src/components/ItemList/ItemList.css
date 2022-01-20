@@ -9,9 +9,10 @@
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    /* margin-top: 25px; */
+
 }
-.filter{
+
+.filter {
     width: 100vw;
     height: 50px;
     display: flex;
@@ -21,7 +22,8 @@
     border: 1px solid black;
     border-radius: 5px;
 }
-select{
+
+select {
     height: 40px;
     margin: 0px 20px;
 }

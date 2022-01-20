@@ -9,7 +9,7 @@ const Favorites = () => {
     <section className="favorites">
       {favoriteItems.map((item) => (
         <FavoriteItem
-        key={item.id}
+          key={item.id}
           id={item.id}
           imageSrc={item.imageSrc}
           title={item.title}

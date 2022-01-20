@@ -6,6 +6,7 @@ import {
   addToFavorite,
   removeFromFavorite,
 } from '../../store/slices/favoriteSlice';
+import { addCompareItem } from '../../store/slices/compareSlice';
 
 const Item = ({ id, title, price, bladeLength, material, imageSrc }) => {
   const [isTargeted, setIsTargeted] = useState(false);
@@ -49,6 +50,18 @@ const Item = ({ id, title, price, bladeLength, material, imageSrc }) => {
     );
     setIsFavorite(false);
   };
+  const compareClickHandler = () => {
+    dispatch(
+      addCompareItem({
+        id: id,
+        title: title,
+        price: price,
+        bladeLength: bladeLength,
+        material: material,
+        imageSrc: imageSrc,
+      })
+    );
+  };
 
   return (
     <div
@@ -74,6 +87,7 @@ const Item = ({ id, title, price, bladeLength, material, imageSrc }) => {
         ) : (
           <button onClick={removeItemFromFavorite}>Undo</button>
         )}
+        <button onClick={compareClickHandler}>Compare</button>
       </div>
     </div>
   );
