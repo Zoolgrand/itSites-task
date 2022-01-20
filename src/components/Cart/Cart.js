@@ -9,7 +9,7 @@ const Cart = () => {
     <section className="cart">
       {cartItems.map((item) => (
         <CartItem
-        key={item.id}
+          key={item.id}
           id={item.id}
           imageSrc={item.imageSrc}
           title={item.title}

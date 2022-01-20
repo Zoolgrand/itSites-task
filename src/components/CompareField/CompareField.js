@@ -1,12 +1,9 @@
 import './CompareField.css';
 import CompareItem from '../CompareItem/CompareItem';
 import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
 
 const CompareField = () => {
   const compareItems = useSelector((state) => state.compare);
-
-  useEffect(() => {}, []);
 
   return (
     <section className="compare">
