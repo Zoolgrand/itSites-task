@@ -6,8 +6,6 @@ import { useEffect } from 'react';
 const CompareField = () => {
   const compareItems = useSelector((state) => state.compare);
 
-  console.log(compareItems);
-
   useEffect(() => {}, []);
 
   return (
