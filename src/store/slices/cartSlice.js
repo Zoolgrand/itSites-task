@@ -16,6 +16,7 @@ const cartSlice = createSlice({
       for (let i = 0; i < state.length; i++) {
         if (state[i].id === action.payload.id) {
           state.splice(i, 1);
+          break
         }
       }
     },
