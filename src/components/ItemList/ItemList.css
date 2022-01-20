@@ -2,11 +2,26 @@
     display: grid;
     grid-template-columns: 400px 400px 400px 400px;
     grid-auto-rows: 300px;
+    margin-top: 25px;
 }
 
 .item-list-wrap {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    margin-top: 25px;
+    /* margin-top: 25px; */
+}
+.filter{
+    width: 100vw;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+select{
+    height: 40px;
+    margin: 0px 20px;
 }

@@ -1,6 +1,4 @@
 import { useSelector } from 'react-redux';
-import Item from '../Item/Item';
-import { useState } from 'react';
 import './Favorites.css';
 import FavoriteItem from '../FavoriteItem/FavoriteItem';
 
@@ -11,6 +9,7 @@ const Favorites = () => {
     <section className="favorites">
       {favoriteItems.map((item) => (
         <FavoriteItem
+        key={item.id}
           id={item.id}
           imageSrc={item.imageSrc}
           title={item.title}
