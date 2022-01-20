@@ -1,20 +1,26 @@
-import { createSlice } from "@reduxjs/toolkit";
-const initialState =[]
+import { createSlice } from '@reduxjs/toolkit';
+const initialState = [];
 const cartSlice = createSlice({
-    name:'cart',
-    initialState,
-    reducers:{
-        addCartItem(state,action){
-            state.push({
-                id:action.payload.id,
-                imageSrc: action.payload.imageSrc,
-                title: action.payload.title,
-                price: action.payload.title
-            })
-        },
-        removeCartItem(state, action){}
-    }
-})
+  name: 'cart',
+  initialState,
+  reducers: {
+    addCartItem(state, action) {
+      state.push({
+        id: action.payload.id,
+        imageSrc: action.payload.imageSrc,
+        title: action.payload.title,
+        price: action.payload.price,
+      });
+    },
+    removeCartItem(state, action) {
+      for (let i = 0; i < state.length; i++) {
+        if (state[i].id === action.payload.id) {
+          state.splice(i, 1);
+        }
+      }
+    },
+  },
+});
 
-export const {addCartItem, removeCartItem} = cartSlice.actions
-export default cartSlice.reducer
+export const { addCartItem, removeCartItem } = cartSlice.actions;
+export default cartSlice.reducer;

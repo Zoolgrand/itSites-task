@@ -1,10 +1,12 @@
-import Favorites from "../components/Favorites/Favorites"
-import Header from "../components/Header/Header"
+import Favorites from '../components/Favorites/Favorites';
+import Header from '../components/Header/Header';
 
-const FavoritesPage = () =>{
-    return <div>
-        <Header/>
-        <Favorites/>
+const FavoritesPage = () => {
+  return (
+    <div>
+      <Header />
+      <Favorites />
     </div>
-}
-export default FavoritesPage
+  );
+};
+export default FavoritesPage;

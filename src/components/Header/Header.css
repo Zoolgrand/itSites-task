@@ -1,8 +1,13 @@
-.wrap{
+.wrap {
     background-color: gray;
     height: 130px;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+}
+
+h1:hover {
+    color: white;
+    cursor: pointer;
 }

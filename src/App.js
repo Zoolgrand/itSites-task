@@ -1,15 +1,17 @@
 import React, { useEffect } from 'react';
 import './App.css';
-import Favorites from './components/Favorites/Favorites';
-import FavoritesPage from './pages/FavoritesPage';
+import { Routes, Route } from 'react-router-dom';
 import MainPage from './pages/MainPage';
-
-
+import CartPage from './pages/CartPage';
+import FavoritePage from './pages/FavoritesPage';
 function App() {
-
   return (
     <div className="App">
-    <MainPage/>
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/cart" element={<CartPage />} />
+        <Route path="/favorites" element={<FavoritePage />} />
+      </Routes>
     </div>
   );
 }
