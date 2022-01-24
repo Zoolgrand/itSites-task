@@ -4,7 +4,7 @@ import Header from '../components/Header/Header';
 const CartPage = () => {
   return (
     <div>
-      <Header />
+      {/* <Header /> */}
       <Cart />
     </div>
   );

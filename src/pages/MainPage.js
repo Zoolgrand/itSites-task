@@ -4,7 +4,7 @@ import ItemList from '../components/ItemList/ItemList';
 const MainPage = () => {
   return (
     <div>
-      <Header />
+      {/* <Header /> */}
       <ItemList />
     </div>
   );

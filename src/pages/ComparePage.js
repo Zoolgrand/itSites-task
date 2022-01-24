@@ -4,7 +4,7 @@ import Header from '../components/Header/Header';
 const ComparePage = () => {
   return (
     <div>
-      <Header />
+      {/* <Header /> */}
       <CompareField />
     </div>
   );

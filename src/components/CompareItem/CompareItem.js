@@ -1,6 +1,7 @@
+import React from 'react';
 import './CompareItem.css';
 
-const CompareItem = ({ id, imageSrc, title, bladeLength, material, price }) => {
+const CompareItem = React.memo(({ id, imageSrc, title, bladeLength, material, price }) => {
   return (
     <div className="compare-item">
       <div>
@@ -14,5 +15,5 @@ const CompareItem = ({ id, imageSrc, title, bladeLength, material, price }) => {
       </div>
     </div>
   );
-};
+})
 export default CompareItem;

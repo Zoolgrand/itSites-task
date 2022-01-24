@@ -1,7 +1,9 @@
 import './CartItem.css';
 import { useDispatch } from 'react-redux';
 import { removeCartItem } from '../../store/slices/cartSlice';
-const CartItem = ({ id, imageSrc, title, price }) => {
+import React from 'react';
+
+const CartItem = React.memo(({ id, imageSrc, title, price }) => {
   const dispatch = useDispatch();
   const removeItemHandler = () => {
     dispatch(
@@ -23,5 +25,5 @@ const CartItem = ({ id, imageSrc, title, price }) => {
       </div>
     </div>
   );
-};
+});
 export default CartItem;

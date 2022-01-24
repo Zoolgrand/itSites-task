@@ -8,12 +8,15 @@ const ItemList = () => {
   const [filterLength, setFilterlength] = useState('');
 
   const getDatas = async () => {
-    const response = await fetch(
-      'https://my-json-server.typicode.com/Zoolgrand/fake-db/knives'
-    );
-    const data = await response.json();
-    setKniwes(data);
-    return data;
+    try {
+      const response = await fetch(
+        'https://my-json-server.typicode.com/Zoolgrand/fake-db/knives'
+      );
+      const data = await response.json();
+      setKniwes(data);
+    } catch (err) {
+      throw new Error('Fatching error');
+    }
   };
 
   const filtredArr = [];

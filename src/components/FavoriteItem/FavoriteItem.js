@@ -2,8 +2,9 @@ import './FavoriteItem.css';
 import { useDispatch } from 'react-redux';
 import { removeFromFavorite } from '../../store/slices/favoriteSlice';
 import { addCartItem } from '../../store/slices/cartSlice';
+import React from 'react';
 
-const FavoriteItem = ({
+const FavoriteItem = React.memo(({
   id,
   title,
   price,
@@ -55,6 +56,6 @@ const FavoriteItem = ({
       </div>
     </div>
   );
-};
+})
 
 export default FavoriteItem;
