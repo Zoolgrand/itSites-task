@@ -1,110 +1,94 @@
-import { useEffect, useState } from 'react';
+import {useEffect, useState} from 'react';
 import Item from '../Item/Item';
 import './ItemList.css';
 
 const ItemList = () => {
-  const [kniwes, setKniwes] = useState([]);
-  const [filterMaterial, setFilterMaterial] = useState('');
-  const [filterLength, setFilterlength] = useState('');
 
-  const getDatas = async () => {
-    try {
-      const response = await fetch(
-        'https://my-json-server.typicode.com/Zoolgrand/fake-db/knives'
-      );
-      const data = await response.json();
-      setKniwes(data);
-    } catch (err) {
-      throw new Error('Fatching error');
+    const [knives, setKnives] = useState([]);
+    const [knivesToRender, setKnivesToRender] = useState([]);
+    const [filterMaterial, setFilterMaterial] = useState('');
+    const [filterLength, setFilterLength] = useState('');
+
+    const paramsObj = {
+        material: 'iron',
+        bladeLength: 10
     }
-  };
 
-  const filtredArr = [];
+    Object.keys(paramsObj).map((paramKey) => {
 
-  if (filterMaterial || filterLength) {
-    if (filterMaterial && filterLength) {
-      filtredArr.length = 0;
-      for (let i = 0; i < kniwes.length; i++) {
-        if (
-          kniwes[i].material == filterMaterial &&
-          kniwes[i].bladeLength == filterLength
-        ) {
-          filtredArr.push(kniwes[i]);
-        }
-      }
-    } else if (filterMaterial) {
-      filtredArr.length = 0;
-      for (let i = 0; i < kniwes.length; i++) {
-        if (kniwes[i].material == filterMaterial) {
-          filtredArr.push(kniwes[i]);
-        }
-      }
-    } else if (filterLength) {
-      filtredArr.length = 0;
-      for (let i = 0; i < kniwes.length; i++) {
-        if (kniwes[i].bladeLength == filterLength) {
-          filtredArr.push(kniwes[i]);
-        }
-      }
+        const resArr = knives.filter(item => {
+
+            return item[paramKey] === paramsObj[paramKey]
+        })
+        console.log(resArr)
+        // setKnivesToRender(resArr)
+
+    })
+
+    const changeMaterialHandler = (e) => {
+        setFilterMaterial(e.target.value)
     }
-  }
+    const changeLengthHandler = (e) => {
+        setFilterLength(e.target.value)
+    }
 
-  let isFilterEnabled = filtredArr.length === 0 ? false : true;
+    const getData = async () => {
+        try {
+            const response = await fetch(
+                'https://my-json-server.typicode.com/Zoolgrand/fake-db/knives'
+            );
+            const data = await response.json();
+            setKnives(data);
+            setKnivesToRender(data);
+        } catch (err) {
+            throw new Error('Fetching error');
+        }
+    };
+    const filteredArr = []
+    let isFilterEnabled = filteredArr.length !== 0
+    const listForRender = isFilterEnabled ? filteredArr : knives
 
-  useEffect(() => {
-    getDatas();
-  }, []);
+    useEffect(() => {
+        getData();
+    }, []);
 
-  return (
-    <div className="item-list-wrap">
-      <div className="filter">
-        <select
-          placeholder="material"
-          onChange={(e) => setFilterMaterial(e.target.value)}
-        >
-          <option defaultValue="" value="">
-            Material
-          </option>
-          <option value="iron">Iron</option>
-          <option value="Wood">Wood</option>
-        </select>
-        <select
-          placeholder="material"
-          onChange={(e) => setFilterlength(e.target.value)}
-        >
-          <option defaultValue="" value="">
-            Blade Length
-          </option>
-          <option value="15"> 15sm</option>
-          <option value="10"> 10sm</option>
-        </select>
-      </div>
-      <section className="item-list">
-        {!isFilterEnabled
-          ? kniwes.map((item) => (
-              <Item
-                key={item.id}
-                id={item.id}
-                title={item.title}
-                price={item.price}
-                bladeLength={item.bladeLength}
-                material={item.material}
-                imageSrc={item.imageSrc}
-              />
-            ))
-          : filtredArr.map((item) => (
-              <Item
-                key={item.id}
-                id={item.id}
-                title={item.title}
-                price={item.price}
-                bladeLength={item.bladeLength}
-                material={item.material}
-                imageSrc={item.imageSrc}
-              />
-            ))}
-      </section>
-    </div>
-  );
+    return (
+        <div className="item-list-wrap">
+            <div className="filter">
+                <select
+                    placeholder="material"
+                    onChange={changeMaterialHandler}
+                >
+                    <option defaultValue="" value="">
+                        Material
+                    </option>
+                    <option value="iron">Iron</option>
+                    <option value="Wood">Wood</option>
+                </select>
+                <select
+                    placeholder="length"
+                    onChange={changeLengthHandler}
+                >
+                    <option defaultValue="" value="">
+                        Blade Length
+                    </option>
+                    <option value="15"> 15sm</option>
+                    <option value="10"> 10sm</option>
+                </select>
+            </div>
+            <section className="item-list">
+                {listForRender.map((item) => (
+                    <Item
+                        key={item.id}
+                        id={item.id}
+                        title={item.title}
+                        price={item.price}
+                        bladeLength={item.bladeLength}
+                        material={item.material}
+                        imageSrc={item.imageSrc}
+                    />))}
+            </section>
+        </div>
+    );
 };
 export default ItemList;
