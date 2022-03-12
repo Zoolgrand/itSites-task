@@ -1,35 +1,17 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import Item from '../Item/Item';
 import './ItemList.css';
 
 const ItemList = () => {
 
     const [knives, setKnives] = useState([]);
-    const [knivesToRender, setKnivesToRender] = useState([]);
-    const [filterMaterial, setFilterMaterial] = useState('');
-    const [filterLength, setFilterLength] = useState('');
-
-    const paramsObj = {
-        material: 'iron',
-        bladeLength: 10
-    }
-
-    Object.keys(paramsObj).map((paramKey) => {
-
-        const resArr = knives.filter(item => {
-
-            return item[paramKey] === paramsObj[paramKey]
-        })
-        console.log(resArr)
-        // setKnivesToRender(resArr)
-
-    })
+    const [filterObj, setFilterObj] = useState({ material: null, bladeLength: null })
 
     const changeMaterialHandler = (e) => {
-        setFilterMaterial(e.target.value)
+        setFilterObj(Object.assign({}, filterObj, { material: e.target.value }))
     }
     const changeLengthHandler = (e) => {
-        setFilterLength(e.target.value)
+        setFilterObj(Object.assign({}, filterObj, { bladeLength: Number(e.target.value) }))
     }
 
     const getData = async () => {
@@ -39,18 +21,22 @@ const ItemList = () => {
             );
             const data = await response.json();
             setKnives(data);
-            setKnivesToRender(data);
         } catch (err) {
             throw new Error('Fetching error');
         }
     };
-    const filteredArr = []
-    let isFilterEnabled = filteredArr.length !== 0
-    const listForRender = isFilterEnabled ? filteredArr : knives
+
+    let itemsForRender = [...knives]
 
     useEffect(() => {
-        getData();
-    }, []);
+        getData()
+    }, [])
+
+    Object.keys(filterObj).forEach((param) => {
+        if (filterObj[param]) {
+            itemsForRender = itemsForRender.filter(item => item[param] === filterObj[param])
+        }
+    })
 
     return (
         <div className="item-list-wrap">
@@ -72,12 +58,12 @@ const ItemList = () => {
                     <option defaultValue="" value="">
                         Blade Length
                     </option>
-                    <option value="15"> 15sm</option>
-                    <option value="10"> 10sm</option>
+                    <option value={15}> 15sm</option>
+                    <option value={10}> 10sm</option>
                 </select>
             </div>
             <section className="item-list">
-                {listForRender.map((item) => (
+                {itemsForRender.map((item) => (
                     <Item
                         key={item.id}
                         id={item.id}
