@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import Item from '../Item/Item';
 import './ItemList.css';
 
@@ -6,12 +7,19 @@ const ItemList = () => {
 
     const [knives, setKnives] = useState([]);
     const [filterObj, setFilterObj] = useState({ material: null, bladeLength: null })
+    const [searchParams, setSearchParams] = useSearchParams()
 
     const changeMaterialHandler = (e) => {
         setFilterObj(Object.assign({}, filterObj, { material: e.target.value }))
     }
     const changeLengthHandler = (e) => {
         setFilterObj(Object.assign({}, filterObj, { bladeLength: Number(e.target.value) }))
+    }
+    const changeParams = () => {
+        setSearchParams({
+            material: filterObj.material ||  '',
+            bladeLength: filterObj.bladeLength || ''
+        })
     }
 
     const getData = async () => {
@@ -32,6 +40,10 @@ const ItemList = () => {
         getData()
     }, [])
 
+    useEffect(() => {
+        changeParams()
+    }, [filterObj, searchParams])
+
     Object.keys(filterObj).forEach((param) => {
         if (filterObj[param]) {
             itemsForRender = itemsForRender.filter(item => item[param] === filterObj[param])
@@ -40,7 +52,7 @@ const ItemList = () => {
 
     return (
         <div className="item-list-wrap">
-            <div className="filter">
+            <div className="filter" >
                 <select
                     placeholder="material"
                     onChange={changeMaterialHandler}
